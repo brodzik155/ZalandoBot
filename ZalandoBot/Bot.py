@@ -3,11 +3,14 @@ import time
 
 
 class ZalandoBot:
+
     def __init__(self, username, password):
         self.username = username
         self.password = password
-
-        self.driver = webdriver.Chrome('chromedriver.exe')
+        #option which let you open in full size
+        options = webdriver.ChromeOptions()
+        options.add_argument("--start-maximized")
+        self.driver = webdriver.Chrome('chromedriver.exe', options=options)
         self.driver.get('https://www.zalando-lounge.pl/#/login')
 
     def login(self):
@@ -17,12 +20,25 @@ class ZalandoBot:
         password.send_keys(self.password)
         click = self.driver.find_element_by_xpath('//*[@id="react-root-form"]/div/div/div[4]/div/form/fieldset/button')
         click.click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath('//*[@id="mainNavWrapper"]/div[2]/div[2]/svg').click()
 
     def open_companies(self, campagnies_id):
         self.driver.get('https://www.zalando-lounge.pl/campaigns/'+campagnies_id+'/all')
 
+    def close(self):
+        self.driver.quit()
+
+    def proba(self):
+        self.driver.find_element_by_xpath('//*[@id="inner-wrapper"]/section/div[2]/nav/a[1]/div').click()
+
 
 ig_bot = ZalandoBot('nasze.zdjecia1997@gmail.com', 'kubekpatryk')
-ig_bot.login()
-time.sleep(2)
-ig_bot.open_companies('ZZO0Y5U')
+try:
+    ig_bot.login()
+    time.sleep(2)
+    ig_bot.open_companies('ZZO0Y5U')
+    time.sleep(1)
+    ig_bot.proba()
+except:
+    ig_bot.close()
