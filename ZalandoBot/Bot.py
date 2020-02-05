@@ -31,6 +31,7 @@ class ZalandoBot:
         submit = self.driver.find_element_by_xpath(credentials_validate)
         submit.click()
         time.sleep(1)
+        self.driver.find_element_by_xpath('//*[@id="mainNavWrapper"]/div[2]/div[2]').click()
 
     def open_companies(self, campagnies_id):
         self.driver.get('https://www.zalando-lounge.pl/campaigns/'+campagnies_id+'/all')
