@@ -54,7 +54,7 @@ class ZalandoBot:
         input_field.send_keys(Keys.RETURN)
 
 
-zalando_bot = ZalandoBot('nasze.zdjecia1997@gmail.com', 'kubekpatryk')
+zalando_bot = ZalandoBot()
 
 zalando_bot.login()
 sleep(2)
